@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 public class ConnectionTest {
     public static void main(String args[]) {
         SpringApplication.run(ConnectionTest.class, args);
-        Client client = new Client();
-
+        ApplicationContext context = ApplicationContextProvider.getContext();
+        Client client = context.getBean(Client.class);
         System.out.println("------------------------------------------------------");
         client.connectToTvService();
         client.connectToInternetService();
@@ -28,6 +28,10 @@ public class ConnectionTest {
 
 @Configuration
 class TelcoServiceFactory {
+    @Bean
+    public Client makeClientService () {
+        return new Client(telcoTvService(), telcoInternetService(), telcoTelephoneService());
+    }
 
     @Bean
     public InternetService telcoInternetService() {

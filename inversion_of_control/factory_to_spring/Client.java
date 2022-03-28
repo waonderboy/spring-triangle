@@ -9,25 +9,22 @@ public class Client {
     private TvService tvService;
     private InternetService internetService;
     private TelephoneService telephoneService;
-    ApplicationContext context = ApplicationContextProvider.getContext();
 
-    public Client() {
-        this.tvService = context.getBean(TvService.class);
-        this.internetService = context.getBean(InternetService.class);
-        this.telephoneService = context.getBean(TelephoneService.class);
+    public Client(TvService tvService, InternetService internetService, TelephoneService telephoneService) {
+        this.tvService = tvService;
+        this.internetService = internetService;
+        this.telephoneService = telephoneService;
     }
 
     public void connectToTvService() {
-        System.out.println(this.tvService.showConnectMessage());
+        System.out.println(tvService.showConnectMessage());
     }
 
     public void connectToInternetService() {
-        System.out.println(this.internetService.showConnectMessage());
+        System.out.println(internetService.showConnectMessage());
     }
 
     public void connectToTelephoneService() {
-        System.out.println(this.telephoneService.showConnectMessage());
+        System.out.println(telephoneService.showConnectMessage());
     }
 }
-
-
